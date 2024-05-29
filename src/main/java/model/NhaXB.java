@@ -8,10 +8,13 @@ package model;
  *
  * @author Admin
  */
+import java.lang.reflect.Field;
 import java.sql.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class NhaXB {
     private String maNXB;
@@ -67,6 +70,83 @@ public class NhaXB {
         return danhSachNhaXB;
     }
 
+    public int add() {//-2 la du lieu chu du 0 la khong them duoc -3 la loi cau lenh
+        if (!kiemTraTatCaKhongRong()) {
+            return -2;
+        }
+        String query = "insert into nhaXB values " + this.toString();
+        try {
+            int rs = Conn.update(query);
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(Sach.class.getName()).log(Level.SEVERE, null, ex);
+            return -3;
+        }
+    }
+
+    public int fix() {
+        try {
+            String query = "UPDATE nhaXB SET tenNXB=?, dienThoai=?, diaChi=? WHERE maNXB=?";
+            Connection con = Conn.conn();
+            con.setAutoCommit(false);
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, this.tenNXB);
+            preparedStatement.setString(2, this.dienThoai);
+            preparedStatement.setString(3, this.diaChi); 
+            preparedStatement.setString(4, this.maNXB); 
+            int i = preparedStatement.executeUpdate();
+            con.commit();
+            return i;
+        } catch (SQLException ex) {
+            Logger.getLogger(Sach.class.getName()).log(Level.SEVERE, null, ex);
+            return -3;
+        }
+
+    }
+
+    public int delete() {
+        String query1 = "delete from Sach where manxb = '" + this.maNXB+"'";
+        String query2 = "delete from nhaXB where manxb = '" + this.maNXB + "'";
+        try {
+            Conn.update(query1);
+            return Conn.update(query2);
+        } catch (SQLException ex) {
+            Logger.getLogger(Sach.class.getName()).log(Level.SEVERE, null, ex);
+            return -3;
+        }
+    }
+
+    // Phương thức kiểm tra xem tất cả các thuộc tính có giá trị không rỗng không
+    public boolean kiemTraTatCaKhongRong() {
+        Field[] fields = this.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            try {
+                Object value = field.get(this);
+                if (value == null || (value instanceof String && ((String) value).isEmpty())) {
+                    return false; // Nếu có ít nhất một thuộc tính rỗng, trả về false
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return true; // Nếu tất cả các thuộc tính không rỗng, trả về true
+    }
     
+    
+    @Override
+    public String toString(){
+        StringBuilder str = new StringBuilder();
+        str.append("('");
+        str.append(maNXB);
+        str.append("',N'");
+        str.append(this.tenNXB);
+        str.append("','");
+        str.append(this.dienThoai);
+        str.append("',N'");
+        str.append(this.diaChi);
+        str.append(")");
+        return str.toString();
+    }
     
 }

@@ -108,7 +108,7 @@ public class Sach {
         return danhSachSach;
     }
 
-    public int Add() {//-2 la du lieu chu du 0 la khong them duoc -3 la loi cau lenh
+    public int add() {//-2 la du lieu chu du 0 la khong them duoc -3 la loi cau lenh
         if (!kiemTraTatCaKhongRong()) {
             return -2;
         }
