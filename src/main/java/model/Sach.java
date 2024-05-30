@@ -85,6 +85,17 @@ public class Sach {
         this.maNXB = maNXB;
     }
 
+    public static String lastMaS(){
+        String query = "select top 1 * from Sach order by MaS desc";
+        try {
+            ResultSet rs = Conn.getData(query);
+            rs.next();
+            return rs.getString(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(Sach.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
     public static List<Sach> layDanhSachSach() {
         List<Sach> danhSachSach = new ArrayList<>();
 

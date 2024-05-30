@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class NhaXB {
+
     private String maNXB;
     private String tenNXB;
     private String dienThoai;
@@ -48,12 +49,23 @@ public class NhaXB {
         return diaChi;
     }
 
+    public static String lastMaNXB() {
+        String query = "select top 1 * from nhaXB order by MaNXB desc";
+        try {
+            ResultSet rs = Conn.getData(query);
+            rs.next();
+            return rs.getString(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(Sach.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
     // Hàm để lấy danh sách các nhà xuất bản từ cơ sở dữ liệu
     public static List<NhaXB> layDanhSachNhaXB() {
         List<NhaXB> danhSachNhaXB = new ArrayList<>();
-       
 
-        try (ResultSet rs =Conn.getData("SELECT [MaNXB], [TenNXB], [DienThoai], [DiaChi] FROM [dbo].[NhaXB]")) {
+        try (ResultSet rs = Conn.getData("SELECT [MaNXB], [TenNXB], [DienThoai], [DiaChi] FROM [dbo].[NhaXB]")) {
 
             while (rs.next()) {
                 String maNXB = rs.getString("MaNXB");
@@ -64,7 +76,7 @@ public class NhaXB {
                 danhSachNhaXB.add(nhaXB);
             }
         } catch (SQLException e) {
-            
+
         }
 
         return danhSachNhaXB;
@@ -92,8 +104,8 @@ public class NhaXB {
             PreparedStatement preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, this.tenNXB);
             preparedStatement.setString(2, this.dienThoai);
-            preparedStatement.setString(3, this.diaChi); 
-            preparedStatement.setString(4, this.maNXB); 
+            preparedStatement.setString(3, this.diaChi);
+            preparedStatement.setString(4, this.maNXB);
             int i = preparedStatement.executeUpdate();
             con.commit();
             return i;
@@ -105,7 +117,7 @@ public class NhaXB {
     }
 
     public int delete() {
-        String query1 = "delete from Sach where manxb = '" + this.maNXB+"'";
+        String query1 = "delete from Sach where manxb = '" + this.maNXB + "'";
         String query2 = "delete from nhaXB where manxb = '" + this.maNXB + "'";
         try {
             Conn.update(query1);
@@ -132,10 +144,9 @@ public class NhaXB {
         }
         return true; // Nếu tất cả các thuộc tính không rỗng, trả về true
     }
-    
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder str = new StringBuilder();
         str.append("('");
         str.append(maNXB);
@@ -145,8 +156,8 @@ public class NhaXB {
         str.append(this.dienThoai);
         str.append("',N'");
         str.append(this.diaChi);
-        str.append(")");
+        str.append("')");
         return str.toString();
     }
-    
+
 }
