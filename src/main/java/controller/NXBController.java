@@ -36,7 +36,7 @@ public class NXBController {
     public String createMaNXB(){
         String mas = NhaXB.lastMaNXB();
         if(mas == null){
-            return "nxb001";
+            return "nxb1";
         }
         Integer so = Integer.parseInt(mas.substring(3));
         so +=1;

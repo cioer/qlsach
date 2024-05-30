@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import model.Sach;
 
+
 /**
  *
  * @author Admin
@@ -24,6 +25,7 @@ public class fmSach extends javax.swing.JFrame {
      */
     public fmSach() {
         initComponents();
+        
     }
 
     /**
@@ -73,7 +75,7 @@ public class fmSach extends javax.swing.JFrame {
 
         jLabel1.setText("Mã sách:");
 
-        tfMaS.setEnabled(false);
+        tfMaS.setEditable(false);
 
         jLabel2.setText("Tên sách:");
 
@@ -85,8 +87,21 @@ public class fmSach extends javax.swing.JFrame {
 
         jLabel6.setText("Mã NXB:");
 
+        btExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Exit.png"))); // NOI18N
         btExit.setText("Thoát");
+        btExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExitActionPerformed(evt);
+            }
+        });
 
+        cmbNXB.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cmbNXBFocusGained(evt);
+            }
+        });
+
+        btAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Add.png"))); // NOI18N
         btAdd.setText("Thêm");
         btAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +109,7 @@ public class fmSach extends javax.swing.JFrame {
             }
         });
 
+        btFix.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Edit.png"))); // NOI18N
         btFix.setText("Sửa");
         btFix.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,6 +117,7 @@ public class fmSach extends javax.swing.JFrame {
             }
         });
 
+        btDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
         btDelete.setText("Xóa");
         btDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,13 +125,15 @@ public class fmSach extends javax.swing.JFrame {
             }
         });
 
-        btCancle.setText("Hủy");
+        btCancle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/reset.png"))); // NOI18N
+        btCancle.setText("Reset");
         btCancle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCancleActionPerformed(evt);
             }
         });
 
+        btXemNXB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
         btXemNXB.setText("Xem TT NXB");
         btXemNXB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,32 +150,34 @@ public class fmSach extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfTenS))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfMaS)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfTacgia)
-                            .addComponent(tfNamXB))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbNXB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(tfTenS, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel4)
+                                .addGap(33, 33, 33)
+                                .addComponent(tfNamXB))
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tfMaS, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(41, 41, 41)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfTacgia)))
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
-                                .addComponent(tfDongia))))
+                                .addComponent(tfDongia))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbNXB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btAdd)
                         .addGap(18, 18, 18)
@@ -197,7 +218,7 @@ public class fmSach extends javax.swing.JFrame {
                     .addComponent(btDelete)
                     .addComponent(btCancle)
                     .addComponent(btXemNXB))
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         tb.setModel(new javax.swing.table.DefaultTableModel(
@@ -228,7 +249,18 @@ public class fmSach extends javax.swing.JFrame {
             }
         });
 
+        Spinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SpinnerStateChanged(evt);
+            }
+        });
+
         btLast.setText(">>");
+        btLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLastActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -236,7 +268,7 @@ public class fmSach extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,11 +283,11 @@ public class fmSach extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btFirst, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                        .addComponent(btFirst, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(Spinner, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                        .addComponent(Spinner, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                         .addGap(27, 27, 27)
-                        .addComponent(btLast, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)))
+                        .addComponent(btLast, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -299,6 +331,7 @@ public class fmSach extends javax.swing.JFrame {
         if (current.equals("Thêm")) {
             btAdd.setText("Lưu");
             showTextField(true);
+            this.resetTextFields();
             tfMaS.setText(sCtl.createMaSach());
             btDelete.setEnabled(false);
             btFix.setEnabled(false);
@@ -339,7 +372,12 @@ public class fmSach extends javax.swing.JFrame {
             btAdd.setEnabled(false);
             btDelete.setEnabled(false);
         } else {
+            
             String mas = gt(tfMaS);
+            if(mas.isEmpty()){
+                JOptionPane.showMessageDialog(rootPane,"Chọn lại một hàng trong bảng!");
+                return;
+            }
             String tens = gt(tfTenS);
             String tacgia = gt(tfTacgia);
             String namxb = gt(tfNamXB);
@@ -357,13 +395,10 @@ public class fmSach extends javax.swing.JFrame {
     private void tbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMouseClicked
         // TODO add your handling code here:
         int row = tb.getSelectedRow();
-        tfMaS.setText(tb.getValueAt(row, 0).toString());
-        tfTenS.setText(tb.getValueAt(row, 1).toString());
-        tfTacgia.setText(tb.getValueAt(row, 2).toString());
-        tfNamXB.setText(tb.getValueAt(row, 3).toString());
-        tfDongia.setText(tb.getValueAt(row, 4).toString());
-        cmbNXB.setSelectedItem(tb.getValueAt(row, 5).toString());
+        tbToTF(row);
+        this.Spinner.setValue(row);
     }//GEN-LAST:event_tbMouseClicked
+
 
     private void btXemNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXemNXBActionPerformed
         // TODO add your handling code here:
@@ -380,7 +415,7 @@ public class fmSach extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Chọn hàng trong bảng để xóa!");
             return;
         }
-        int ck = JOptionPane.showConfirmDialog(rootPane, "Xóa Sach" + gt(tfTenS));
+        int ck = JOptionPane.showConfirmDialog(rootPane, "Xóa Sach " + gt(tfTenS));
         if (ck == JOptionPane.YES_OPTION) {
             String mas = gt(tfMaS);
             String tens = gt(tfTenS);
@@ -400,8 +435,48 @@ public class fmSach extends javax.swing.JFrame {
 
     private void btFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstActionPerformed
         // TODO add your handling code here:
-        
+
+        this.Spinner.setValue(0);
+
     }//GEN-LAST:event_btFirstActionPerformed
+
+    private void cmbNXBFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbNXBFocusGained
+        // TODO add your handling code here:
+        sCtl.hienListNXB(cmbNXB);
+    }//GEN-LAST:event_cmbNXBFocusGained
+
+    private void SpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SpinnerStateChanged
+        // TODO add your handling code here:
+        int row = tb.getSelectedRow();
+        int rowcount = tb.getRowCount();
+        int spinnerValue = (int) this.Spinner.getValue();
+        if(spinnerValue >= rowcount){
+            rowcount --;
+            this.Spinner.setValue(rowcount);
+            return;
+        }
+        if(spinnerValue < 0){
+            this.Spinner.setValue(0);
+            return;
+        }
+        if(spinnerValue == row){
+            return;
+        }
+        tb.getSelectionModel().setSelectionInterval(spinnerValue, spinnerValue);
+        tbToTF(spinnerValue);
+    }//GEN-LAST:event_SpinnerStateChanged
+
+    private void btLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastActionPerformed
+        // TODO add your handling code here:
+        int rowCount = tb.getRowCount();
+        rowCount --;
+        this.Spinner.setValue(rowCount);
+    }//GEN-LAST:event_btLastActionPerformed
+
+    private void btExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExitActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btExitActionPerformed
 
     private void resetTextFields() {
         btAdd.setEnabled(true);
@@ -423,18 +498,22 @@ public class fmSach extends javax.swing.JFrame {
         return cmb.getSelectedItem().toString();
     }
 
-    /**
-     * @param args the command line arguments
-     */
+    private void tbToTF(int row){
+        tfMaS.setText(tb.getValueAt(row, 0).toString());
+        tfTenS.setText(tb.getValueAt(row, 1).toString());
+        tfTacgia.setText(tb.getValueAt(row, 2).toString());
+        tfNamXB.setText(tb.getValueAt(row, 3).toString());
+        tfDongia.setText(tb.getValueAt(row, 4).toString());
+        cmbNXB.setSelectedItem(tb.getValueAt(row, 5).toString());
+    }
     
-
     private void showTextField(boolean ck) {
 
-        tfTenS.setEnabled(ck);
-        tfTacgia.setEnabled(ck);
-        tfNamXB.setEnabled(ck);
-        tfDongia.setEnabled(ck);
-        cmbNXB.setEnabled(ck);
+        tfTenS.setEditable(ck);
+        tfTacgia.setEditable(ck);
+        tfNamXB.setEditable(ck);
+        tfDongia.setEditable(ck);
+        cmbNXB.setEditable(ck);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner Spinner;

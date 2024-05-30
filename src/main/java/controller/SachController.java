@@ -43,7 +43,7 @@ public class SachController {
     public String createMaSach(){
         String mas = Sach.lastMaS();
         if(mas == null){
-            return "b001";
+            return "b1";
         }
         Integer so = Integer.parseInt(mas.substring(1));
         so +=1;

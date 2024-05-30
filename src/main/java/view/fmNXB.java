@@ -73,12 +73,13 @@ public class fmNXB extends javax.swing.JFrame {
 
         jLabel2.setText("Tên nhà xuất bản");
 
-        tfmanxb.setEnabled(false);
+        tfmanxb.setEditable(false);
 
         jLabel3.setText("Địa chỉ");
 
         jLabel4.setText("Điện thoại");
 
+        btadd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Add.png"))); // NOI18N
         btadd.setText("Thêm");
         btadd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,6 +87,7 @@ public class fmNXB extends javax.swing.JFrame {
             }
         });
 
+        btfix.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Edit.png"))); // NOI18N
         btfix.setText("Sửa");
         btfix.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +95,7 @@ public class fmNXB extends javax.swing.JFrame {
             }
         });
 
+        btdelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
         btdelete.setText("xóa");
         btdelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +103,7 @@ public class fmNXB extends javax.swing.JFrame {
             }
         });
 
+        btsave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/save.png"))); // NOI18N
         btsave.setText("Lưu");
         btsave.setEnabled(false);
         btsave.addActionListener(new java.awt.event.ActionListener() {
@@ -108,6 +112,7 @@ public class fmNXB extends javax.swing.JFrame {
             }
         });
 
+        btexit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Exit.png"))); // NOI18N
         btexit.setText("Thoát");
         btexit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +120,7 @@ public class fmNXB extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/reset.png"))); // NOI18N
         jButton1.setLabel("Hủy");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +159,7 @@ public class fmNXB extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(btsave)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addComponent(btexit)
                         .addGap(64, 64, 64))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -339,7 +345,7 @@ public class fmNXB extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Chọn hàng trong bảng để xóa!");
             return;
         }
-        int ck = JOptionPane.showConfirmDialog(rootPane, "Xóa nhà xuất bản" + gt(tftennxb));
+        int ck = JOptionPane.showConfirmDialog(rootPane, "Xóa nhà xuất bản " + gt(tftennxb) + " và những quyển sách của nhà xuất bản này!");
         if (ck == JOptionPane.YES_OPTION) {
             NhaXB nxb = new NhaXB(gt(tfmanxb), gt(tftennxb), gt(tfdienthoai), gt(tfdiachi));
             nxb.delete();
@@ -367,9 +373,9 @@ public class fmNXB extends javax.swing.JFrame {
     }
 
     private void showTF(boolean ck) {
-        tfdiachi.setEnabled(ck);
-        tfdienthoai.setEnabled(ck);
-        tftennxb.setEnabled(ck);
+        tfdiachi.setEditable(ck);
+        tfdienthoai.setEditable(ck);
+        tftennxb.setEditable(ck);
     }
 
     /**
