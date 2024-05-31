@@ -291,6 +291,9 @@ public class fmNXB extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         deleteTF();
+        showTF(false);
+        showBt(true);
+        chucNang = ChucNang.None;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
@@ -381,7 +384,6 @@ public class fmNXB extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btadd;
